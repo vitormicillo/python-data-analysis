@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 
-st.title("My first streamlit app :smile:")
+# st.title("My first streamlit app :smile:")
 
 # Load data
 @st.cache_data
@@ -22,7 +22,10 @@ st.write("Let's chart the US state population data from the year 2019")
 #             x='states',
 #             y='population')
 
-st.header("3. No make it interactive")
+
+
+
+st.header("3. Selecting by year")
 st.write("It's your turn to select a year")
 
 # Using st.selectbox
@@ -45,7 +48,9 @@ if selected_year:
                 x='states',
                 y='population')
     
-st.header("4. How about a line chart?")
+
+
+st.header("4. Line chart?")
 st.write("Track changes over time")
 df_line_chart = df.copy()
 df_line_chart['year'] = df_line_chart['year'].astype(str)
@@ -58,13 +63,15 @@ c = (
 )
 st.altair_chart(c, use_container_width=True)
 
-st.header("5. Sprinkle in more interactivity")
+
+
+st.header("5. Select by state or region")
 st.write("Use `st.multiselect` and `st.slider` for data filter before chart creation")
 states = st.multiselect("Pick your states",
                         list(df.states.unique())[::-1],
                         "California")
 
-date_range = st.slider("Picl your date range", 2010, 2019,(2010, 2019))
+date_range = st.slider("Pick your date range", 2010, 2019,(2010, 2019))
 
 if states:
     chart_data = df[df['states'].isin(states)]
